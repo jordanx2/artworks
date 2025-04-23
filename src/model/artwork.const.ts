@@ -1,0 +1,28 @@
+import { ArtworkFormik } from "./artwork.model";
+
+export const defaultArtwork: ArtworkFormik = {
+  Title: '',
+  Artist: '',
+  Date: '',
+  Classification: '',
+  ObjectID: 0,
+  URL: '',
+  _id: '',
+  ConstituentID: 0,
+  ArtistBio: '',
+  Nationality: '',
+  BeginDate: 0,
+  EndDate: 0,
+  Gender: '',
+  Medium: '',
+  Dimensions: '',
+  CreditLine: '',
+  AccessionNumber: '',
+  Department: '',
+  DateAcquired: '',
+  Cataloged: '',
+  ImageURL: '',
+  OnView: '',
+  'Height (cm)': undefined,
+  'Width (cm)': undefined,
+};

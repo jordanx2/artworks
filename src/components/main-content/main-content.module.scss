@@ -1,0 +1,22 @@
+.buttonContainer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
+.currentIdx {
+  width: 40px;
+}
+
+.mainContentContainer {
+  display: flex;
+  align-items: stretch;
+}
+
+.buttonPanelContainer {
+  display: flex;
+  flex-direction: column;
+}

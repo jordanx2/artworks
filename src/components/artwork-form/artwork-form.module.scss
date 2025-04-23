@@ -1,0 +1,49 @@
+.formContainer {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+label {
+  flex: 1;
+  font-weight: 600;
+}
+
+input {
+  flex: 2;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.imageWrapper {
+  width: 525px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artworkImage {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  padding: 0.5rem;
+  display: block;
+}
