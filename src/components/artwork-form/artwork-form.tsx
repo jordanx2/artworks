@@ -101,6 +101,10 @@ const ArtworkForm = ({ artwork }: ArtworkFormProps) => {
               <BootstrapInputField name="URL" placeholderText="URL" value={artwork.URL} isDisabled={isReadonly}/>
             </FlexRow>
             <FlexRow className={styles.formRow}>
+              <label htmlFor="ImageURL">ImageURL:</label>
+              <BootstrapInputField name="ImageURL" placeholderText="ImageURL" value={artwork.ImageURL} isDisabled={isReadonly}/>
+            </FlexRow>
+            <FlexRow className={styles.formRow}>
               <label htmlFor="OnView">On View:</label>
               <BootstrapInputField name="OnView" placeholderText="On View" value={artwork.OnView ?? ''} isDisabled={isReadonly}/>
             </FlexRow>

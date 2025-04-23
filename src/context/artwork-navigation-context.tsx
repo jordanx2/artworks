@@ -18,6 +18,7 @@ interface ArtworkNavigationContextProps {
   setProjectedArtworks: Dispatch<React.SetStateAction<ArtworkFormik[]>>;
   firstRender: RefObject<boolean>;
   onDeleteCallback: (artId: string) => void;
+  isUserInserting: RefObject<boolean>;
 }
 
 const ArtworkNavigationContext = createContext<ArtworkNavigationContextProps | undefined>(undefined);
@@ -37,6 +38,7 @@ export const ArtworkNavigationProvider: React.FC<{ children: React.ReactNode }> 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const firstRender = useRef<boolean>(true);
   const [isUserSearching, setIsUserSearching] = useState<boolean>(false);
+  const isUserInserting = useRef<boolean>(false);
 
   useEffect(() => {
     if(projectedArtworks.length > 0) {
@@ -96,7 +98,8 @@ export const ArtworkNavigationProvider: React.FC<{ children: React.ReactNode }> 
         firstRender,
         setIsUserSearching,
         isUserSearching,
-        onDeleteCallback
+        onDeleteCallback,
+        isUserInserting
       }}
     >
       {children}

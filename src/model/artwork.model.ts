@@ -1,5 +1,5 @@
 export interface Artwork {
-  _id?: string;
+  _id: string;
   Title: string;
   Artist: string[];
   ConstituentID?: number[];

@@ -3,7 +3,7 @@ import { createArtwork, deleteArtwork, searchArtworks, updateArtwork } from '../
 import { ArtworkFormik } from '../../model/artwork.model';
 import FlexColumn from '../shared/flex-column/flex-column';
 import styles from './interactive-button-panel.module.scss'
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useState } from 'react';
 import { FormikProps } from 'formik';
 import { defaultArtwork } from '../../model/artwork.const';
 import { useArtworkNavigation } from '../../context/artwork-navigation-context';
@@ -31,27 +31,25 @@ const InteractiveButtonPanel = ({
   toggleViewCollections,
   addToCollection
 } :InteractiveButtonPanelProps) => {
-  const isUserInserting = useRef<boolean>(false);
   const [searchResults, setSearchResults] = useState<ArtworkFormik[]>([]);
 
-  const showCardViewIfGrid = () => toggleView ? onViewToggleClicked() : undefined;
+  const showCardViewIfGrid = () => {
+    if(toggleView) {
+      onViewToggleClicked()
+    }
+  }; 
 
   const { 
     setCurrentArtwork, 
     setArtworks,
     onLast,
     setProjectedArtworks,
-    currentIndex,
     setIsUserSearching,
     isUserSearching,
     artworks,
-    onDeleteCallback
+    onDeleteCallback,
+    isUserInserting
   } = useArtworkNavigation();
-
-  useEffect(() => {
-    isUserInserting.current = false
-    setIsUserSearching(false);
-  }, [currentIndex]);
 
   const setArtworkSearchResults = (results: ArtworkFormik[]) => {
     setSearchResults(results);

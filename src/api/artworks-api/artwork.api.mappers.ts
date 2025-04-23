@@ -1,4 +1,4 @@
-import { Artwork, ArtworkFormik } from "../model/artwork.model";
+import { Artwork, ArtworkFormik } from "../../model/artwork.model";
 
 export const mapArtworksFromApi = (artwork: Artwork): ArtworkFormik =>
   ({
@@ -28,7 +28,7 @@ export const mapArtworksFromApi = (artwork: Artwork): ArtworkFormik =>
     'Width (cm)': artwork['Width (cm)'],
 });
 
-export const mapArtworksToApi = (artwork: ArtworkFormik): Artwork => ({
+export const mapArtworksToApi = (artwork: ArtworkFormik): Partial<Artwork> => ({
     Title: artwork.Title,
     Artist: artwork.Artist.split(',').map((a) => a.trim()),
     ConstituentID: artwork.ConstituentID !== undefined ? [artwork.ConstituentID] : [],
@@ -48,7 +48,7 @@ export const mapArtworksToApi = (artwork: ArtworkFormik): Artwork => ({
     Cataloged: artwork.Cataloged || '',
     ObjectID: artwork.ObjectID,
     URL: artwork.URL,
-    ImageURL: artwork.URL || '',
+    ImageURL: artwork.ImageURL || '',
     OnView: artwork.OnView || '',
     'Height (cm)': artwork['Height (cm)'],
     'Width (cm)': artwork['Width (cm)'],

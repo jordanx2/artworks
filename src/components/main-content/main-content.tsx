@@ -36,7 +36,9 @@ const MainContent: React.FC = () => {
     setProjectedArtworks,
     firstRender,
     artworks,
-    onDeleteCallback
+    onDeleteCallback,
+    isUserInserting,
+    setIsUserSearching
   } = useArtworkNavigation();
 
   useEffect(() => {
@@ -57,6 +59,11 @@ const MainContent: React.FC = () => {
       })();
     }
   }, []);
+
+  useEffect(() => {
+    isUserInserting.current = false
+    setIsUserSearching(false);
+  }, [currentIndex, currentView]);
 
   const onLoginSuccess = async (user: LoginDetailsDomain) => {
     setCurrentUser(user);
@@ -132,7 +139,7 @@ const MainContent: React.FC = () => {
             formikRef={formikRef}
             onViewToggleClicked={() => setCurrentView((prev) => prev === ArtworkView.CARD ? ArtworkView.GRID : ArtworkView.CARD) }
             toggleLoginScreen={() => setCurrentView((prev) => prev === ArtworkView.LOGIN ? ArtworkView.CARD : ArtworkView.LOGIN) }
-            toggleView={currentView === ArtworkView.GRID}
+            toggleView={currentView !== ArtworkView.CARD}
             isLoginScreenOpen={currentView === ArtworkView.LOGIN}
             isUserLoggedIn={!!currentUser}
             logoutUser={logoutUser}
