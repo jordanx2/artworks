@@ -2,16 +2,25 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { ArtworkFormik } from '../../model/artwork.model';
 import FlexRow from '../shared/flex-row/flex-row';
 import styles from './artwork-grid.module.scss';
+import FlexColumn from '../shared/flex-column/flex-column';
 
 interface ArtworkGridProps {
   artworks: ArtworkFormik[];
   onArtworkDelete: (id: string) => void;
+  onExportImages?: () => void;
 }
 
-const ArtworkGrid = ({ artworks, onArtworkDelete }: ArtworkGridProps) => {
+const ArtworkGrid = ({ artworks, onArtworkDelete, onExportImages }: ArtworkGridProps) => {
   if (artworks.length === 0) return <p>No artworks to display.</p>;
 
   return (
+    <FlexColumn>
+    { onExportImages && (
+      <FlexRow justify='center' align='center'>
+        <button onClick={onExportImages}>Export collection images</button>
+      </FlexRow>
+    )}
+
     <FlexRow className={styles.gridWrapper}>
       <table className={styles.artworkTable}>
         <thead>
@@ -41,6 +50,7 @@ const ArtworkGrid = ({ artworks, onArtworkDelete }: ArtworkGridProps) => {
         </tbody>
       </table>
     </FlexRow>
+    </FlexColumn>
   );
 };
 

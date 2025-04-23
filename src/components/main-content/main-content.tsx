@@ -17,6 +17,7 @@ import { LoginDetailsDomain } from '../login-form/login-form.const';
 import { ArtworkView } from './main-content.const';
 import { addToUserCollections, getUserCollections, removeFromUserCollections } from '../../api/collections-api/collections-api';
 import ExportImages from '../export-images/export-images';
+import { useImageExporter } from '../export-images/use-export-images';
 
 const MainContent: React.FC = () => {
   const formikRef = useRef<FormikProps<ArtworkFormik>>(null);
@@ -24,6 +25,7 @@ const MainContent: React.FC = () => {
   const [currentView, setCurrentView] = useState<ArtworkView>(ArtworkView.CARD);
   const [userCollections, setUserCollections] = useState<ArtworkFormik[]>([]);
   const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
+  const { downloadImages } = useImageExporter();
 
   const toggleExportModal = () => setIsExportModalOpen(prev => !prev);
 
@@ -125,6 +127,10 @@ const MainContent: React.FC = () => {
     }
   };
 
+  const onCollectionImageDownloaded = async () => {
+    await downloadImages(userCollections.map(art => art.ImageURL!), () => undefined);
+  };
+
   const initialValues: ArtworkFormik = { ...currentArtwork };
   const validationSchema = useMemo(() => ValidationSchema(isUserSearching), [isUserSearching]);
 
@@ -197,6 +203,7 @@ const MainContent: React.FC = () => {
             <ArtworkGrid 
               artworks={userCollections} 
               onArtworkDelete={deleteArtworkFromCollection}
+              onExportImages={userCollections.length > 0 ? onCollectionImageDownloaded: undefined}
             />
           ) : (
             <p>No collections available.</p>
