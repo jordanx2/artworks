@@ -32,7 +32,7 @@
 <body>
   <h1>About This Application</h1>
 
-  <p>This web application allows users to manage a catalog of artworks. It was developed as part of the Enterprise Application Development assignment using a RESTful client-server architecture.</p>
+  <p>This web application allows users to manage a catalog of artworks. It was developed as part of the Enterprise Application Development assignment using a RESTful client-server architecture, and is designed to resemble the experience of a real-world catalog management system.</p>
 
   <h2>Technologies Used</h2>
   <ul>
@@ -40,32 +40,39 @@
     <li><strong>Backend:</strong> Node.js, Express, MongoDB (in-memory via <code>mongodb-memory-server</code>)</li>
     <li><strong>Data Streaming:</strong> <code>stream-json</code> for efficient loading of large JSON files</li>
     <li><strong>Form Handling & Validation:</strong> Formik for form management, Yup for validation</li>
-    <li><strong>API Communication:</strong> Axios for structured HTTP requests to the server</li>
-    <li><strong>UI Libraries:</strong> React Bootstrap for layout and components, Font Awesome for icons</li>
-    <li><strong>Notifications:</strong> <code>react-toastify</code> to provide real-time feedback to the user</li>
+    <li><strong>API Communication:</strong> Axios for structured HTTP requests</li>
+    <li><strong>UI Libraries:</strong> React Bootstrap, Font Awesome</li>
+    <li><strong>Notifications:</strong> <code>react-toastify</code> for real-time user feedback</li>
   </ul>
 
   <h2>Key Features</h2>
   <ul>
-    <li>Insert, update, delete and search artworks</li>
-    <li>Client-side validation using Formik and Yup</li>
-    <li>Navigation through artworks</li>
+    <li>Insert, update, delete, and search artworks</li>
+    <li>Client-side form validation using Formik and Yup</li>
+    <li>Paginated navigation through artworks</li>
+    <li><strong>Grid View:</strong> View artworks in a tabular format for better readability</li>
+    <li><strong>User Authentication:</strong> Login/signup functionality with simple credential checks</li>
+    <li><strong>Collections:</strong> Users can add artworks to their personal collection</li>
+    <li>Dedicated "About this Page" section served via static HTML</li>
+    <li>Responsive UI with dynamic controls and transitions</li>
   </ul>
 
   <h2>Limitations</h2>
   <ul>
-    <li>Currently uses an in-memory MongoDB database which resets on restart</li>
-    <li>Basic search functionality without advanced filters</li>
-    <li>No persistent file uploads or image hosting</li>
+    <li>In-memory MongoDB resets on server restart (no permanent data storage)</li>
+    <li>User authentication is basic (no hashing or session management)</li>
+    <li>No real image hosting (only image URLs used)</li>
   </ul>
 
-  <h2>Alternative Approaches Considered</h2>
+  <h2>Possible Enhancements</h2>
   <ul>
-    <li>Using a persistent MongoDB Atlas database for permanent storage</li>
-    <li>Integrating Redux for more complex state management</li>
-    <li>Implementing server-side rendering with Next.js for SEO optimization</li>
+    <li>Replace in-memory DB with MongoDB Atlas for persistent storage</li>
+    <li>Add password hashing and session/token management for secure login</li>
+    <li>Allow users to upload and store images</li>
+    <li>Enhance search with filters like classification, date, and artist</li>
+    <li>Add edit/view modes to collections</li>
   </ul>
 
-  <p><em>Last updated: Sunday 20th April 2025</em></p>
+  <p><em>Last updated: Wednesday 23rd April 2025</em></p>
 </body>
 </html>

@@ -122,7 +122,11 @@ const InteractiveButtonPanel = ({
   const onUpdate = async () => {
     const currentFormik = formikRef.current?.values;
 
-    if(!currentFormik || isUserSearching || isUserInserting.current || await checkFormikErrors() ) {
+    if(!currentFormik || isUserSearching || isUserInserting.current) {
+      return;
+    }
+
+    if(await checkFormikErrors()) {
       return;
     }
 
