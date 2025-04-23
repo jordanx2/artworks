@@ -236,7 +236,7 @@ const InteractiveButtonPanel = ({
       ) }
 
       <button onClick={() => {
-        if(isUserLoggedIn) {
+        if(!isUserLoggedIn) {
           toast.warning('Please login to export images');
           return;
         }
