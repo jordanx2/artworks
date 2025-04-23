@@ -18,6 +18,7 @@ interface InteractiveButtonPanelProps {
   logoutUser: () => void;
   toggleViewCollections: () => void;
   addToCollection: () => void;
+  toggleExportView: () => void;
 }
 
 const InteractiveButtonPanel = ({
@@ -29,7 +30,8 @@ const InteractiveButtonPanel = ({
   isUserLoggedIn,
   logoutUser,
   toggleViewCollections,
-  addToCollection
+  addToCollection,
+  toggleExportView
 } :InteractiveButtonPanelProps) => {
   const [searchResults, setSearchResults] = useState<ArtworkFormik[]>([]);
 
@@ -232,6 +234,15 @@ const InteractiveButtonPanel = ({
           <button onClick={toggleViewCollections}>View Collection</button>  
         </>
       ) }
+
+      <button onClick={() => {
+        if(isUserLoggedIn) {
+          toast.warning('Please login to export images');
+          return;
+        }
+
+        toggleExportView();
+      }}>Export Images</button>  
       <button onClick={() => window.open('http://localhost:3001/about', '_blank')}>About this Page</button>
     </FlexColumn>
   );

@@ -3,4 +3,5 @@ export enum ArtworkView {
   CARD = 'card',
   LOGIN = 'login',
   COLLECTIONS = 'collections',
+  EXPORT = 'export',
 }

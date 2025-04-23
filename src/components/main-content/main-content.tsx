@@ -16,12 +16,16 @@ import LoginForm from '../login-form/login-form';
 import { LoginDetailsDomain } from '../login-form/login-form.const';
 import { ArtworkView } from './main-content.const';
 import { addToUserCollections, getUserCollections, removeFromUserCollections } from '../../api/collections-api/collections-api';
+import ExportImages from '../export-images/export-images';
 
 const MainContent: React.FC = () => {
   const formikRef = useRef<FormikProps<ArtworkFormik>>(null);
   const [currentUser, setCurrentUser] = useState<LoginDetailsDomain>();
   const [currentView, setCurrentView] = useState<ArtworkView>(ArtworkView.CARD);
   const [userCollections, setUserCollections] = useState<ArtworkFormik[]>([]);
+  const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
+
+  const toggleExportModal = () => setIsExportModalOpen(prev => !prev);
 
   const {
     setCurrentArtwork,
@@ -133,6 +137,13 @@ const MainContent: React.FC = () => {
         </p>
       )}
 
+      { isExportModalOpen && (
+        <ExportImages 
+          onClose={toggleExportModal}
+          artworks={artworks}
+        />
+      )}
+
       <FlexRow justify='center' className={styles.mainContentContainer}>
         <FlexRow className={styles.buttonPanelContainer}>
           <InteractiveButtonPanel
@@ -145,6 +156,7 @@ const MainContent: React.FC = () => {
             logoutUser={logoutUser}
             toggleViewCollections={() => setCurrentView((prev) => prev === ArtworkView.COLLECTIONS ? ArtworkView.CARD : ArtworkView.COLLECTIONS) }
             addToCollection={addToCollection}
+            toggleExportView={toggleExportModal}
           />
         </FlexRow>
 
