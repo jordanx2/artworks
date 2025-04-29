@@ -10,7 +10,7 @@ const INCREMENT_AMOUNT = 50;
 
 interface ArtworkGridProps {
   artworks: ArtworkFormik[];
-  onArtworkDelete: (id: string) => void;
+  onArtworkDelete: (id: string) => Promise<boolean>;
   onExportImages?: () => void;
 }
 
@@ -70,7 +70,11 @@ const ArtworkGrid = ({ artworks, onArtworkDelete, onExportImages }: ArtworkGridP
                   <td>{art.Classification}</td>
                   <td>{art.ObjectID}</td>
                   <td> { !art.ImageURL ? (<>Artwork Unavailable</>) : <img src={art.ImageURL} alt="Artwork" className={styles.image}/> } </td>
-                  <td><FaTrashAlt onClick={() => onArtworkDelete(art._id)}/></td>
+                  <td><FaTrashAlt onClick={async () => {
+                    if(await onArtworkDelete(art._id)) {
+                      setProjectedGridView((prev) => prev.filter((item) => item._id !== art._id));
+                    }
+                  }}/></td>
                 </tr>
               </> 
             ))}

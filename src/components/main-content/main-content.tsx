@@ -111,16 +111,19 @@ const MainContent: React.FC = () => {
   const deleteArtworkFromCollection = async (id: string) => {
     if (!currentUser) {
       toast.error('You must be logged in to add to your collection.');
-      return;
+      return false;
     }
 
     const result = await removeFromUserCollections(currentUser.username, id);
 
     if(result.collections) {
-      setUserCollections((prev) => prev.filter((art) => result.collections.includes(art._id)));
-
+      setUserCollections((prev) => prev.filter((art) => art._id !== id));
       toast.success(result.message);
+
+      return true;
     }
+
+    return false;
   };
 
   const onGridDelete = async (artId: string) => {
@@ -129,7 +132,11 @@ const MainContent: React.FC = () => {
     if(response.message) {
       onDeleteCallback(artId);
       toast.success(`Artwork successfully deleted: ${artId}`);
+
+      return true;
     }
+
+    return false;
   };
 
   const onCollectionImageDownloaded = async () => {
