@@ -18,7 +18,7 @@ const startDatabase = async () => {
 
   console.log('Connected to in-memory MongoDB with Mongoose');
 
-  const filePath = path.join(__dirname, 'Artworks.dev.json');
+  const filePath = path.join(__dirname, 'Artworks.prod.json');
 
   // Return a promise that resolves when the stream finishes
   await new Promise((resolve, reject) => {
