@@ -49,7 +49,10 @@ const MainContent: React.FC = () => {
 
   useEffect(() => {
     if (firstRender.current) {
-      toast.info('Data is being loaded please wait...');
+      setTimeout(() => {
+        toast.info('Data is being loaded please wait...');
+      }, 100);
+
       firstRender.current = false;
 
       (async () => {
@@ -130,9 +133,13 @@ const MainContent: React.FC = () => {
   };
 
   const onCollectionImageDownloaded = async () => {
-    await downloadImages(userCollections.map(art => art.ImageURL!), () => undefined);
+    const validImages = userCollections
+      .filter(art => art.ImageURL && art.ImageURL.trim() !== '')
+      .map(art => art.ImageURL!);
+  
+    await downloadImages(validImages, () => undefined);
   };
-
+  
   const initialValues: ArtworkFormik = { ...currentArtwork };
   const validationSchema = useMemo(() => ValidationSchema(isUserSearching), [isUserSearching]);
 

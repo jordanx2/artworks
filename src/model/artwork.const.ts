@@ -23,6 +23,6 @@ export const defaultArtwork: ArtworkFormik = {
   Cataloged: '',
   ImageURL: '',
   OnView: '',
-  'Height (cm)': undefined,
-  'Width (cm)': undefined,
+  'Height (cm)': 0,
+  'Width (cm)': 0,
 };

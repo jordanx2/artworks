@@ -2,11 +2,11 @@ import * as Yup from 'yup';
 
 export const ValidationSchema = (isUserSearching: boolean) =>
   Yup.object().shape({
-    _id: Yup.string().when([], {
-      is: () => !isUserSearching,
-      then: (schema) => schema.required('ID is required'),
-      otherwise: (schema) => schema.notRequired(),
-    }),
+    // _id: Yup.string().when([], {
+    //   is: () => !isUserSearching,
+    //   then: (schema) => schema.required('ID is required'),
+    //   otherwise: (schema) => schema.notRequired(),
+    // }),
 
     Title: Yup.string()
       .max(200, 'Title must be at most 200 characters')

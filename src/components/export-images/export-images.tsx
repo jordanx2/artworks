@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import styles from './export-images.module.scss';
 import { ArtworkFormik } from '../../model/artwork.model';
 import { useImageExporter } from './use-export-images';
+import InfiniteScrollingWrapper from '../shared/infinite-scrolling-wrapper/infinite-scrolling-wrapper';
+
+const INCREMENT_AMOUNT = 200;
+
 interface ExportImagesProps {
   onClose: () => void;
   artworks: ArtworkFormik[];
@@ -10,7 +14,9 @@ interface ExportImagesProps {
 
 const ExportImages = ({ onClose, artworks }: ExportImagesProps) => {
   const [selected, setSelected] = useState<Set<string>>(new Set());
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [projectedExportView, setProjectedExportView] = useState<ArtworkFormik[]>(artworks.slice(0, INCREMENT_AMOUNT));
+  const [currentIncrement, setCurrentIncrement] = useState<number>(INCREMENT_AMOUNT);
   const { downloadImages } = useImageExporter();
 
   const toggleImage = (url: string) => {
@@ -30,9 +36,28 @@ const ExportImages = ({ onClose, artworks }: ExportImagesProps) => {
       <Modal.Header>
         <Modal.Title>Select Images to Export</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <div className={styles.imageGrid}>
-          {artworks
+      <Modal.Body className={styles.modalBody}>
+      <InfiniteScrollingWrapper 
+        infiniteScrollingProps={{
+        fetchMore: (increment: number) => setCurrentIncrement((prev) => {
+        const nextStartIndex = prev;
+        const nextEndIndex = prev + increment;
+
+        setProjectedExportView(viewPrev => {
+        const nextBatch = artworks.slice(nextStartIndex, nextEndIndex);
+
+        return [...viewPrev, ...nextBatch];
+        });
+
+        return nextEndIndex;
+        }),
+        canFetchMore: currentIncrement <= artworks.length,
+        containerRef: containerRef,
+        fetchMoreIncrement: INCREMENT_AMOUNT
+        }}
+      >
+        <div className={styles.imageGrid} ref={containerRef}>
+          {projectedExportView
           .filter(art => !!art.ImageURL)
           .map(art => (
             <div key={art._id} className={styles.imageCard}>
@@ -48,6 +73,7 @@ const ExportImages = ({ onClose, artworks }: ExportImagesProps) => {
             </div>
           ))}
         </div>
+        </InfiniteScrollingWrapper>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>Cancel</Button>

@@ -16,7 +16,7 @@ interface ArtworkGridProps {
 
 const ArtworkGrid = ({ artworks, onArtworkDelete, onExportImages }: ArtworkGridProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [projectedGridView, setProjectedGridView] = useState<ArtworkFormik[]>(artworks.splice(0, INCREMENT_AMOUNT));
+  const [projectedGridView, setProjectedGridView] = useState<ArtworkFormik[]>(artworks.slice(0, INCREMENT_AMOUNT));
   const [currentIncrement, setCurrentIncrement] = useState<number>(INCREMENT_AMOUNT);
 
   if (artworks.length === 0) return <p>No artworks to display.</p>;
