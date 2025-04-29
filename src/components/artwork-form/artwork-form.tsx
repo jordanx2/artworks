@@ -122,7 +122,9 @@ const ArtworkForm = ({ artwork }: ArtworkFormProps) => {
         <FlexRow className={styles.formRow}>
           <label>Image:</label>
           <div className={styles.imageWrapper}>
-            <img src={artwork.ImageURL} alt="Artwork" className={styles.artworkImage} />
+            { !artwork.ImageURL ? (
+              <>Artwork Unavailable</>
+            ): <img src={artwork.ImageURL} alt="Artwork" className={styles.artworkImage} /> }
           </div>
         </FlexRow>
       </form>

@@ -75,8 +75,17 @@ export const ArtworkNavigationProvider: React.FC<{ children: React.ReactNode }> 
   };
 
   const onDeleteCallback = async (artId: string) => {
-    setArtworks(prev => prev.filter(art => art._id !== artId));
-    setProjectedArtworks(prev => prev.filter(art => art._id !== artId));
+    setArtworks(prev => {
+      const newArtworks = prev.filter(art => art._id !== artId);
+
+      if(newArtworks.length == 0) {
+        setCurrentArtwork(defaultArtwork);
+      }
+
+      setProjectedArtworks(newArtworks);
+
+      return newArtworks;
+    });
     onFirst();
   };
   

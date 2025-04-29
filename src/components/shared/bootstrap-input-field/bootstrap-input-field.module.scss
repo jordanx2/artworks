@@ -3,6 +3,10 @@
   color: #999;
   opacity: 1;
 }
+.bootstrapInputField {
+  background: none !important ;
+  color: #fff !important;
+}
 
 .bootstrapInputTextarea {
   text-align: start;
@@ -48,16 +52,5 @@
 }
 
 .isInvalid {
-  border: 1px solid red;
-}
-
-.formikTooltip {
-  font-size: 0.85rem;
-  font-weight: normal;
-  background-color: #333;
-  color: #fff;
-  max-width: 220px;
-  text-align: left;
-  padding: 6px 10px;
-  border-radius: 4px; 
+  border: 1px solid red !important;
 }

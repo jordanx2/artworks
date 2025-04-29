@@ -119,6 +119,8 @@ const InteractiveButtonPanel = ({
       onDeleteCallback(artId);
       toast.success(`Artwork successfully deleted: ${artId}`);
     }
+
+    
   };
 
   const onUpdate = async () => {

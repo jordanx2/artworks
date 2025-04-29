@@ -38,7 +38,7 @@ const BootstrapInputField: React.FC<BootstrapFormProps> = ({
         placement="top"
         overlay={
           meta.error ? (
-        <Tooltip id={`tooltip-${name}`} className={styles.formikTooltip}>{meta.error}</Tooltip>
+        <Tooltip id={`tooltip-${name}`}>{meta.error}</Tooltip>
           ) : (
         <></>
           )

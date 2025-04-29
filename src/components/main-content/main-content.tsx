@@ -85,6 +85,8 @@ const MainContent: React.FC = () => {
   };
 
   const addToCollection = async () => {
+    if(currentView !== ArtworkView.CARD) return;
+
     if (!currentUser) {
       toast.error('You must be logged in to add to your collection.');
       return;
